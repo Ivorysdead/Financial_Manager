@@ -5,19 +5,27 @@ namespace MyFirstAzureFunction.Implementations.Services;
 
 public class AccountService : IAccountService
 {
-    private readonly List<AccountModel> _accounts = new List<AccountModel>();  // "data store"
+    
+    // "data store"
+    private readonly List<AccountModel> _accounts = new List<AccountModel>();
 
+    
+    // Get Accounts
     public Task<List<AccountModel>> GetAccountsByUserIdAsync(string userId)
     {
         return Task.FromResult(_accounts.Where(a => a.UserID == userId).ToList());
     }
 
+    
+    // Add new Account
     public Task AddAccountAsync(AccountModel account)
     {
         _accounts.Add(account);
         return Task.CompletedTask;
     }
 
+    
+    // Remove Account
     public Task RemoveAccountAsync(int accountId)
     {
         var account = _accounts.FirstOrDefault(a => a.AccountId == accountId);
@@ -28,9 +36,12 @@ public class AccountService : IAccountService
         return Task.CompletedTask;
     }
 
+    
+    // Switch Between Accounts
     public Task SwitchAccountAsync(string userId, int accountId)
     {
-        // Logic for switching accounts, e.g., update a 'CurrentAccountId' field for the user
+        
+        // Update a 'CurrentAccountId' field for the user
         return Task.CompletedTask;
     }
 }
