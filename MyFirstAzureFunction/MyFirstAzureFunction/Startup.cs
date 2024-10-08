@@ -23,6 +23,9 @@ namespace MyFirstAzureFunction
                 return factory;
             });
             builder.Services.AddSingleton<IQuickCalculations, QuickCalculationsService>();
+            
+            // Account service
+            builder.Services.AddSingleton<IAccountService, AccountService>();
         }
     }
 }

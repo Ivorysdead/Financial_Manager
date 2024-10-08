@@ -7,4 +7,8 @@ public class AccountModel
     public string AccountName { get; set; }
     public decimal CurrentBalance { get; set; }
     public string UserID { get; set; }  // Foreign key
+    
+    
+    // For account switch
+    public bool IsActive { get; set; }
 }

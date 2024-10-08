@@ -1,47 +1,103 @@
 using MyFirstAzureFunction.Interfaces;
 using MyFirstAzureFunction.Models;
+using Newtonsoft.Json;
 
-namespace MyFirstAzureFunction.Implementations.Services;
-
-public class AccountService : IAccountService
+namespace MyFirstAzureFunction.Implementations.Services
 {
-    
-    // "data store"
-    private readonly List<AccountModel> _accounts = new List<AccountModel>();
-
-    
-    // Get Accounts
-    public Task<List<AccountModel>> GetAccountsByUserIdAsync(string userId)
+    public class AccountService : IAccountService
     {
-        return Task.FromResult(_accounts.Where(a => a.UserID == userId).ToList());
-    }
+        private readonly string _filePath = "accounts.txt";
 
-    
-    // Add new Account
-    public Task AddAccountAsync(AccountModel account)
-    {
-        _accounts.Add(account);
-        return Task.CompletedTask;
-    }
-
-    
-    // Remove Account
-    public Task RemoveAccountAsync(int accountId)
-    {
-        var account = _accounts.FirstOrDefault(a => a.AccountId == accountId);
-        if (account != null)
+        // Reads all accounts from file
+        private List<AccountModel> ReadAllAccounts()
         {
-            _accounts.Remove(account);
-        }
-        return Task.CompletedTask;
-    }
+            try
+            {
+                if (!File.Exists(_filePath)) return new List<AccountModel>();
 
-    
-    // Switch Between Accounts
-    public Task SwitchAccountAsync(string userId, int accountId)
-    {
+                var accounts = File.ReadAllLines(_filePath)
+                                   .Select(JsonConvert.DeserializeObject<AccountModel>)
+                                   .Where(account => account != null)
+                                   .ToList();
+
+                return accounts;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error reading accounts in file", e);
+            }
+        }
+
         
-        // Update a 'CurrentAccountId' field for the user
-        return Task.CompletedTask;
+        // Writes all accounts to the file
+        private void WriteAllAccounts(List<AccountModel> accounts)
+        {
+            try
+            {
+                var serializedAccounts = accounts.Select(JsonConvert.SerializeObject);
+                File.WriteAllLines(_filePath, serializedAccounts);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error writing accounts to file", e);
+            }
+        }
+
+        
+        // Get all accounts for specified user
+        public Task<List<AccountModel>> GetAccountsByUserIdAsync(string userId)
+        {
+            var accounts = ReadAllAccounts().Where(a => a.UserID == userId).ToList();
+            return Task.FromResult(accounts);
+        }
+
+        
+        // Add new account
+        public Task AddAccountAsync(AccountModel account)
+        {
+            var accounts = ReadAllAccounts();
+            accounts.Add(account); // Adds new account
+            WriteAllAccounts(accounts); // Updates file list
+
+            return Task.CompletedTask;
+        }
+
+        
+        // Remove an account
+        public Task RemoveAccountAsync(int accountId)
+        {
+            var accounts = ReadAllAccounts();
+            var account = accounts.FirstOrDefault(a => a.AccountId == accountId);
+
+            if (account != null)
+            {
+                accounts.Remove(account); // Removes account
+                WriteAllAccounts(accounts); // Updates file list
+            }
+
+            return Task.CompletedTask;
+        }
+
+        
+        // Switch between accounts
+        public Task SwitchAccountAsync(string userId, int accountId)
+        {
+            var accounts = ReadAllAccounts();
+            var accountToSwitch = accounts.FirstOrDefault(a => a.AccountId == accountId && a.UserID == userId);
+
+            if (accountToSwitch != null)
+            {
+                // Business logic to mark the account as active (switch)
+                foreach (var account in accounts.Where(a => a.UserID == userId))
+                {
+                    account.IsActive = false; // All other accounts inactive
+                }
+                accountToSwitch.IsActive = true; // Switch to the desired account
+
+                WriteAllAccounts(accounts); // Update the file with new state
+            }
+
+            return Task.CompletedTask;
+        }
     }
 }
