@@ -6,21 +6,26 @@ namespace MyFirstAzureFunction.Implementations.Services;
 
 public class LoanService : ILoan
 {
-    private readonly string _filePath = "loans.txt";
+    private readonly string _filePath =  "loans.txt";
+    
+
     public List<LoanRequestModel> GetAllLoans()
     {
         try
         {
-            if (!File.Exists(_filePath)) return new List<LoanRequestModel>();
+            if (!File.Exists(_filePath))
+            {
+                return new List<LoanRequestModel>();
+            }
 
             var loans = File.ReadAllLines(_filePath)
                 .Select(JsonConvert.DeserializeObject<LoanRequestModel>)
                 .ToList();
+                
             return loans;
         }
         catch (Exception ex)
         {
-            // Handle error appropriately (log, throw, etc.)
             throw new Exception("Error reading loans from file.", ex);
         }
     }
@@ -34,7 +39,7 @@ public class LoanService : ILoan
         }
         catch (Exception ex)
         {
-            // Handle error appropriately (log, throw, etc.)
+            
             throw new Exception("Error writing loan to file.", ex);
         }
     }

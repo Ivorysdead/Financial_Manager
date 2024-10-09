@@ -2,7 +2,7 @@
   "profiles": {
     "MyFirstAzureFunction": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7205",
+      "commandLineArgs": "--port 7208",
       "launchBrowser": false
     }
   }

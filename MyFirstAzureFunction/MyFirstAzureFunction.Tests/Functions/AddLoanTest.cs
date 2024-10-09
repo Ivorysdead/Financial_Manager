@@ -59,7 +59,7 @@ public class AddLoanTest
 
             Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(responseContent, Is.EqualTo(requestBody));
-            _logger.Verify(logger => logger.Log(LogLevel.Information, It.IsAny<EventId>(), It.IsAny<It.IsAnyType>(), It.IsAny<Exception>(), It.IsAny<Func<It.IsAnyType, Exception, string>>()!), Times.Exactly(2));
+            _logger.Verify(logger => logger.Log(LogLevel.Information, It.IsAny<EventId>(), It.IsAny<It.IsAnyType>(), It.IsAny<Exception>(), It.IsAny<Func<It.IsAnyType, Exception, string>>()!), Times.Exactly(3));
             _loan.Verify(service => service.AddLoan(It.IsAny<LoanRequestModel>()), Times.Once);
         }
         
