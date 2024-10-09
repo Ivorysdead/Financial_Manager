@@ -19,7 +19,9 @@ namespace MyFirstAzureFunction.Implementations.Services
                                    .Select(JsonConvert.DeserializeObject<AccountModel>)
                                    .Where(account => account != null)
                                    .ToList();
-
+                
+                // Log the number of accounts read
+                Console.WriteLine($"Read {accounts.Count} accounts from file.");
                 return accounts;
             }
             catch (Exception e)

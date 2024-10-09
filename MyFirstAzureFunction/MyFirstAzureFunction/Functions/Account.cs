@@ -42,7 +42,6 @@ public class Account
         [HttpTrigger(AuthorizationLevel.Function, "post", Route = "accounts")] AccountModel account,
         ILogger log)
     {
-        // TODO: (account) switched to (AccountModel) Make sure program doesn't blow up with this
         await _accountService.AddAccountAsync(account);
         return new OkResult();
     }

@@ -25,7 +25,7 @@ namespace MyFirstAzureFunction
             builder.Services.AddSingleton<IQuickCalculations, QuickCalculationsService>();
             
             // Account service
-            builder.Services.AddSingleton<IAccountService, AccountService>();
+            //builder.Services.AddSingleton<IAccountService, AccountService>();
         }
     }
 }
