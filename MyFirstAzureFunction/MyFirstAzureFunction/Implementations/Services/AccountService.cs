@@ -9,35 +9,44 @@ namespace MyFirstAzureFunction.Implementations.Services
         private readonly string _filePath = "accounts.txt";
 
         // Reads all accounts from file
-        private List<AccountModel> ReadAllAccounts()
+        public List<AccountModel> ReadAllAccounts()
         {
             try
             {
-                if (!File.Exists(_filePath)) return new List<AccountModel>();
+                if (!File.Exists(_filePath))
+                {
+                    return new List<AccountModel>();
+                }
 
-                var accounts = File.ReadAllLines(_filePath)
-                                   .Select(JsonConvert.DeserializeObject<AccountModel>)
-                                   .Where(account => account != null)
-                                   .ToList();
-                
-                // Log the number of accounts read
-                Console.WriteLine($"Read {accounts.Count} accounts from file.");
-                return accounts;
+                // Read the entire content of the file as a string
+                var fileContent = File.ReadAllText(_filePath);
+        
+                // Deserialize the JSON array into a list of AccountModel objects
+                var accounts = JsonConvert.DeserializeObject<List<AccountModel>>(fileContent);
+
+                // TODO: test line below
+                Console.WriteLine(Directory.GetCurrentDirectory());
+        
+                return accounts ?? new List<AccountModel>(); // Return an empty list if deserialization returns null
             }
             catch (Exception e)
             {
-                throw new Exception("Error reading accounts in file", e);
+                throw new Exception("Error reading accounts from file", e);
             }
         }
 
+        
         
         // Writes all accounts to the file
         private void WriteAllAccounts(List<AccountModel> accounts)
         {
             try
             {
-                var serializedAccounts = accounts.Select(JsonConvert.SerializeObject);
-                File.WriteAllLines(_filePath, serializedAccounts);
+                // Serialize the entire list as a single JSON array
+                var serializedAccounts = JsonConvert.SerializeObject(accounts, Formatting.Indented);
+        
+                // Write the entire JSON array to the file
+                File.WriteAllText(_filePath, serializedAccounts);
             }
             catch (Exception e)
             {
@@ -46,40 +55,15 @@ namespace MyFirstAzureFunction.Implementations.Services
         }
 
         
+        
         // Get all accounts for specified user
-        public Task<List<AccountModel>> GetAccountsByUserIdAsync(string userId)
+        public List<AccountModel> GetAccountsByUserIdAsync(string userId)
         {
             var accounts = ReadAllAccounts().Where(a => a.UserID == userId).ToList();
-            return Task.FromResult(accounts);
+            return accounts;
         }
 
         
-        // Add new account
-        public Task AddAccountAsync(AccountModel account)
-        {
-            var accounts = ReadAllAccounts();
-            accounts.Add(account); // Adds new account
-            WriteAllAccounts(accounts); // Updates file list
-
-            return Task.CompletedTask;
-        }
-
-        
-        // Remove an account
-        public Task RemoveAccountAsync(int accountId)
-        {
-            var accounts = ReadAllAccounts();
-            var account = accounts.FirstOrDefault(a => a.AccountId == accountId);
-
-            if (account != null)
-            {
-                accounts.Remove(account); // Removes account
-                WriteAllAccounts(accounts); // Updates file list
-            }
-
-            return Task.CompletedTask;
-        }
-
         
         // Switch between accounts
         public Task SwitchAccountAsync(string userId, int accountId)
@@ -98,7 +82,7 @@ namespace MyFirstAzureFunction.Implementations.Services
 
                 WriteAllAccounts(accounts); // Update the file with new state
             }
-
+            
             return Task.CompletedTask;
         }
     }

@@ -28,35 +28,17 @@ public class Account
         string userId,
         ILogger log)
     {
-        var accounts = await _accountService.GetAccountsByUserIdAsync(userId);
+        var accounts = _accountService.GetAccountsByUserIdAsync(userId);
         if (accounts == null || accounts.Count == 0)
         {
             return new NotFoundResult();
         }
         return new OkObjectResult(accounts);
     }
+    
 
-    // Add new account
-    [Function("AddAccount")]
-    public async Task<IActionResult> AddAccount(
-        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "accounts")] AccountModel account,
-        ILogger log)
-    {
-        await _accountService.AddAccountAsync(account);
-        return new OkResult();
-    }
-
-    // Remove account
-    [Function("RemoveAccount")]
-    public async Task<IActionResult> RemoveAccount(
-        [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "accounts/{accountId}")] HttpRequest req,
-        int accountId,
-        ILogger log)
-    {
-        await _accountService.RemoveAccountAsync(accountId);
-        return new OkResult();
-    }
-
+    /*
+    // TODO: delete if no longer needed
     // Switch account
     [Function("SwitchAccount")]
     public async Task<IActionResult> SwitchAccount(
@@ -66,6 +48,33 @@ public class Account
         ILogger log)
     {
         await _accountService.SwitchAccountAsync(userId, accountId);
-        return new OkResult();
+
+        string message = $"Account switched to account with ID of {accountId} successfully!";
+        return new OkObjectResult(new { Message = message});
+    }
+    */
+}
+
+public class SwitchAccountFunction
+{
+    private readonly IAccountService _accountService;
+
+    
+    public SwitchAccountFunction(IAccountService accountService, ILogger<SwitchAccountFunction> logger)
+    {
+        _accountService = accountService;
+    }
+    
+    [Function("SwitchAccount")]
+    public async Task<IActionResult> SwitchAccount(
+        [HttpTrigger(AuthorizationLevel.Function, "put", Route = "accounts/switch/{userId}/{accountId}")] HttpRequestData req,
+        string userId,
+        int accountId,
+        ILogger log)
+    {
+        await _accountService.SwitchAccountAsync(userId, accountId);
+
+        string message = $"Account switched to account with ID of {accountId} successfully!";
+        return new OkObjectResult(new { Message = message});
     }
 }
