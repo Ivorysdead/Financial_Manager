@@ -23,8 +23,7 @@ namespace MyFirstAzureFunction.Implementations.Services
         
                 // Deserialize the JSON array into a list of AccountModel objects
                 var accounts = JsonConvert.DeserializeObject<List<AccountModel>>(fileContent);
-
-                // TODO: test line below
+                
                 Console.WriteLine(Directory.GetCurrentDirectory());
         
                 return accounts ?? new List<AccountModel>(); // Return an empty list if deserialization returns null

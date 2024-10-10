@@ -35,24 +35,6 @@ public class Account
         }
         return new OkObjectResult(accounts);
     }
-    
-
-    /*
-    // TODO: delete if no longer needed
-    // Switch account
-    [Function("SwitchAccount")]
-    public async Task<IActionResult> SwitchAccount(
-        [HttpTrigger(AuthorizationLevel.Function, "put", Route = "accounts/switch/{userId}/{accountId}")] HttpRequest req,
-        string userId,
-        int accountId,
-        ILogger log)
-    {
-        await _accountService.SwitchAccountAsync(userId, accountId);
-
-        string message = $"Account switched to account with ID of {accountId} successfully!";
-        return new OkObjectResult(new { Message = message});
-    }
-    */
 }
 
 public class SwitchAccountFunction
