@@ -31,7 +31,7 @@
         "UserId": 103,
         "LoanId": 1003,
         "AccountId": 5003,
-        "TransactionAmount": 55.0,
+        "TransactionAmount": 50.0,
         "Balance": 1250.0,
         "ArithmeticOperation": "Subtract"
     }
