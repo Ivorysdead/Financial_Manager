@@ -12,27 +12,25 @@ using Newtonsoft.Json;
 
 namespace MyFirstAzureFunction.Functions;
 
-public class Account
+public class SwitchAccount
 {
     private readonly IAccountService _accountService;
 
-    public Account(IAccountService accountService)
+    public SwitchAccount(IAccountService accountService)
     {
         _accountService = accountService;
     }
-
-    // Get all accounts for a user
-    [Function("GetAccounts")]
+    
+    [Function("SwitchAccount")]
     public async Task<IActionResult> GetAccounts(
-        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "accounts/{userId}")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Function, "put", Route = "accounts/switch/{userId}/{accountId}")] HttpRequestData req,
         string userId,
+        int accountId,
         ILogger log)
     {
-        var accounts = _accountService.GetAccountsByUserIdAsync(userId);
-        if (accounts == null || accounts.Count == 0)
-        {
-            return new NotFoundResult();
-        }
-        return new OkObjectResult(accounts);
+        await _accountService.SwitchAccountAsync(userId, accountId);
+
+        string message = $"Account switched to account with ID of {accountId} successfully!";
+        return new OkObjectResult(new { Message = message});
     }
 }

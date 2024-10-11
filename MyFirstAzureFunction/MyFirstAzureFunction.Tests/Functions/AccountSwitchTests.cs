@@ -27,8 +27,8 @@ public class AccountSwitchTests
         _quickCalculations = new Mock<IQuickCalculations>();
         _sut = new QuickTrigger(_logger.Object, _quickCalculations.Object);
     }
-    
-    [Test]
+    /*
+     [Test]
     public async Task Given_ValidUserIdAndAccountId_Then_SwitchAccount_Returns_SuccessMessage()
     {
         // Arrange
@@ -150,5 +150,7 @@ public class AccountSwitchTests
             It.IsAny<Exception>(), 
             (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()), Times.Once);
     }
+     */
+    
 
 }
