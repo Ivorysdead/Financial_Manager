@@ -13,13 +13,13 @@ using Newtonsoft.Json;
 
 namespace MyFirstAzureFunction.Tests.Functions;
 
-public class AccountSwitchTests
+public class SwitchAccountTests
 {
     private readonly Mock<ILogger<QuickTrigger>> _logger;
     private readonly Mock<IQuickCalculations> _quickCalculations;
     private readonly QuickTrigger _sut; //SUT = System Under Test
     
-    public AccountSwitchTests()
+    public SwitchAccountTests()
     {
         
         
