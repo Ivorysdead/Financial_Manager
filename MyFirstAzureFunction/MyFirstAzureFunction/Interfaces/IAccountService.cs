@@ -4,6 +4,6 @@ namespace MyFirstAzureFunction.Interfaces;
 
 public interface IAccountService
 {
-    List<AccountModel> GetAccountsByUserIdAsync(string userId);
+    Task<List<AccountModel>> GetAccountsByUserIdAsync(string userId); // Change here
     Task SwitchAccountAsync(string userId, int accountId);
 }

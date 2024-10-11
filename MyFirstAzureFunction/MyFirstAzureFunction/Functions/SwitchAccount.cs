@@ -25,19 +25,37 @@ public class SwitchAccount
         [HttpTrigger(AuthorizationLevel.Function, "post", Route = "accounts/switch")] HttpRequestData req,
         ILogger log)
     {
-        // Read and deserialize the request body
-        string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-        var requestData = JsonConvert.DeserializeObject<SwitchAccountRequest>(requestBody);
-            
-        if (requestData == null || string.IsNullOrEmpty(requestData.UserId) || requestData.AccountId <= 0)
+        try
         {
-            return new BadRequestObjectResult("Invalid request data.");
+            // Read and deserialize the request body
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            SwitchAccountRequest requestData;
+
+            try
+            {
+                requestData = JsonConvert.DeserializeObject<SwitchAccountRequest>(requestBody);
+            }
+            catch (JsonException jsonEx)
+            {
+                log.LogError(jsonEx, "Error deserializing request body.");
+                return new BadRequestObjectResult("Invalid JSON format.");
+            }
+
+            if (requestData == null || string.IsNullOrEmpty(requestData.UserId) || requestData.AccountId <= 0)
+            {
+                return new BadRequestObjectResult("Invalid request data.");
+            }
+
+            // Call the service to switch the account
+            await _accountService.SwitchAccountAsync(requestData.UserId, requestData.AccountId);
+
+            string message = $"Account switched to account with ID of {requestData.AccountId} successfully!";
+            return new OkObjectResult(new { Message = message });
         }
-
-        // Call the service to switch the account
-        await _accountService.SwitchAccountAsync(requestData.UserId, requestData.AccountId);
-
-        string message = $"Account switched to account with ID of {requestData.AccountId} successfully!";
-        return new OkObjectResult(new { Message = message });
+        catch (Exception e)
+        {
+            log.LogError(e, "An error occurred while switching accounts.");
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+        }
     }
 }

@@ -28,11 +28,19 @@ public class Account
         string userId,
         ILogger log)
     {
-        var accounts = _accountService.GetAccountsByUserIdAsync(userId);
-        if (accounts == null || accounts.Count == 0)
+        try
         {
-            return new NotFoundResult();
+            var accounts = await _accountService.GetAccountsByUserIdAsync(userId); // What does await mean? It gives an error
+            if (accounts == null || accounts.Count == 0)
+            {
+                return new NotFoundResult();
+            }
+            return new OkObjectResult(accounts);
         }
-        return new OkObjectResult(accounts);
+        catch (Exception e)
+        {
+            log.LogError(e, $"Error retrieving accounts for user ID: {userId}");
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+        }
     }
 }
