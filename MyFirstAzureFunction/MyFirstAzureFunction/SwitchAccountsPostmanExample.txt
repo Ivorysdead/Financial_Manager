@@ -1,0 +1,54 @@
+GET
+ http://localhost:7200/api/accounts/jimmy
+ 
+ result
+ {
+   "Value": [
+     {
+       "AccountId": 101,
+       "UserID": "jimmy",
+       "AccountType": "Checking",
+       "AccountName": "Main Checking",
+       "CurrentBalance": 1500.75,
+       "IsActive": true
+     },
+     {
+       "AccountId": 102,
+       "UserID": "jimmy",
+       "AccountType": "Savings",
+       "AccountName": "Emergency Fund",
+       "CurrentBalance": 3200.0,
+       "IsActive": false
+     }
+   ],
+   "Formatters": [],
+   "ContentTypes": [],
+   "DeclaredType": null,
+   "StatusCode": 200
+ }
+ 
+ -------------------------------------------------------
+ 
+ POST
+  http://localhost:7200/api/accounts/switch
+ 
+ JSON
+ {
+     "UserId": "jimmy",
+     "AccountId": 100
+ }
+ 
+ 
+ result
+ {
+   "Value": {
+     "Message": "Account switched to account with ID of 100 successfully!"
+   },
+   "Formatters": [],
+   "ContentTypes": [],
+   "DeclaredType": null,
+   "StatusCode": 200
+ }
+ 
+ -------------------------------------------------------
+ 
