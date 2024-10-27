@@ -1,0 +1,29 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/Environment/Filtering/ExcludeCoverageFilters/=MyFirstAzureFunction_003B_002A_003BMyFirstAzureFunction_002EImplementations_002EServices_002E_002A_003B_002A/@EntryIndexedValue">False</s:Boolean>
+	
+	
+	<s:Boolean x:Key="/Default/Environment/Filtering/ExcludeCoverageFilters/=MyFirstAzureFunction_003B_002A_003B_002A_003B_002A/@EntryIndexedValue">False</s:Boolean>
+	
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=33c1384a_002D731b_002D4439_002Db4b5_002D805eef4bf55d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Given_InvalidLoanData_When_AddLoan_Then_ReturnsBadRequestResponse" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::D51A62D3-CD60-46CC-B5C3-4F14B8A1CAC9::net8.0::MyFirstAzureFunction.Tests.Functions.AddLoanTest.Given_InvalidLoanData_When_AddLoan_Then_ReturnsBadRequestResponse&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=47ec16a4_002D087f_002D4bcd_002D9628_002D2355e2db3f36/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;MyFirstAzureFunction.Tests&amp;gt; #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\quinn\RiderProjects\Financial_Manager\MyFirstAzureFunction\MyFirstAzureFunction.Tests" Presentation="&amp;lt;MyFirstAzureFunction.Tests&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=55e3cf79_002D2730_002D4f9f_002Daca6_002D6fed8b04a7ab/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;MyFirstAzureFunction.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\quinn\RiderProjects\Financial_Manager\MyFirstAzureFunction\MyFirstAzureFunction.Tests" Presentation="&amp;lt;MyFirstAzureFunction.Tests&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a541f002_002Dec5e_002D47fa_002D8246_002D26f7ab31b537/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bc5e95e2_002D6587_002D4c56_002D993d_002D8a0fd95675f0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

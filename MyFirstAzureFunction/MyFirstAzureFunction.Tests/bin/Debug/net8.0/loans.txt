@@ -1,0 +1,2 @@
+{"LoanId":1,"UserId":1,"LoanName":"Car","LoanAmount":5000.0}
+{"LoanId":2,"UserId":2,"LoanName":"House","LoanAmount":200000.0}
