@@ -22,7 +22,7 @@ namespace MyFirstAzureFunction
                     factory.AddProvider(provider);
                 return factory;
             });
-            builder.Services.AddSingleton<IQuickCalculations, QuickCalculationsService>();
+            //builder.Services.AddSingleton<IQuickCalculations, QuickCalculationsService>();
             builder.Services.AddSingleton<ILoan, LoanService>();
         }
     }
