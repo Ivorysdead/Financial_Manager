@@ -1,0 +1,58 @@
+[
+  {
+    "AccountId": 1140,
+    "UserID": 10114,
+    "AccountType": 1,
+    "AccountName": "Emergency Fund",
+    "CurrentBalance": 10000.0,
+    "IsActive": false
+  },
+  {
+    "AccountId": 1141,
+    "UserID": 10114,
+    "AccountType": 3,
+    "AccountName": "401k",
+    "CurrentBalance": 256000.0,
+    "IsActive": false
+  },
+  {
+    "AccountId": 1142,
+    "UserID": 10114,
+    "AccountType": 1,
+    "AccountName": "New Car Fund",
+    "CurrentBalance": 6250.0,
+    "IsActive": true
+  },
+  {
+    "AccountId": 3780,
+    "UserID": 10378,
+    "AccountType": 1,
+    "AccountName": "New Bike Fund",
+    "CurrentBalance": 1000.0,
+    "IsActive": true
+  },
+  {
+    "AccountId": 3781,
+    "UserID": 10378,
+    "AccountType": 3,
+    "AccountName": "401k",
+    "CurrentBalance": 100.0,
+    "IsActive": false
+  },
+  {
+    "AccountId": 3782,
+    "UserID": 10378,
+    "AccountType": 2,
+    "AccountName": "Family Grocery Fund",
+    "CurrentBalance": 300.0,
+    "IsActive": false
+  },
+  {
+    "AccountId": 1143,
+    "UserID": 10114,
+    "AccountType": 2,
+    "AccountName": "Fun Money",
+    "CurrentBalance": 500.0,
+    "IsActive": false
+  }
+]

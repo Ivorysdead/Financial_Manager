@@ -1,31 +1,47 @@
 GET
- http://localhost:7200/api/accounts/jimmy
+ http://localhost:7200/api/accounts/10114
  
  result
- {
-   "Value": [
-     {
-       "AccountId": 101,
-       "UserID": "jimmy",
-       "AccountType": "Checking",
-       "AccountName": "Main Checking",
-       "CurrentBalance": 1500.75,
-       "IsActive": true
-     },
-     {
-       "AccountId": 102,
-       "UserID": "jimmy",
-       "AccountType": "Savings",
-       "AccountName": "Emergency Fund",
-       "CurrentBalance": 3200.0,
-       "IsActive": false
-     }
-   ],
-   "Formatters": [],
-   "ContentTypes": [],
-   "DeclaredType": null,
-   "StatusCode": 200
- }
+{
+  "Value": [
+    {
+      "AccountId": 1140,
+      "UserID": 10114,
+      "AccountType": 1,
+      "AccountName": "Emergency Fund",
+      "CurrentBalance": 10000,
+      "IsActive": false
+    },
+    {
+      "AccountId": 1141,
+      "UserID": 10114,
+      "AccountType": 3,
+      "AccountName": "401k",
+      "CurrentBalance": 256000,
+      "IsActive": false
+    },
+    {
+      "AccountId": 1142,
+      "UserID": 10114,
+      "AccountType": 1,
+      "AccountName": "New Car Fund",
+      "CurrentBalance": 6250,
+      "IsActive": true
+    },
+    {
+      "AccountId": 1143,
+      "UserID": 10114,
+      "AccountType": 2,
+      "AccountName": "Fun Money",
+      "CurrentBalance": 500,
+      "IsActive": false
+    }
+  ],
+  "Formatters": [],
+  "ContentTypes": [],
+  "DeclaredType": null,
+  "StatusCode": 200
+}
  
  -------------------------------------------------------
  
@@ -34,8 +50,8 @@ GET
  
  JSON
  {
-     "UserId": "jimmy",
-     "AccountId": 100
+     "UserId": 10114,
+     "AccountId": 1140
  }
  
  
