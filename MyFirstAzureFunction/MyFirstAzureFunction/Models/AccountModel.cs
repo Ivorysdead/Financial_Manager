@@ -3,11 +3,11 @@ namespace MyFirstAzureFunction.Models;
 public class AccountModel
 {
     public int AccountId { get; set; } // Primary Key
-    public string UserID { get; set; }  // Foreign key
-    public string AccountType { get; set; }
+    public int UserID { get; set; }  // Foreign key
+    public int AccountType { get; set; }
     public string AccountName { get; set; }
-    public decimal CurrentBalance { get; set; }
+    public double CurrentBalance { get; set; }
     
-    // For account switch
+    // FIXME: make sure this doesn't interfere with Fabian's branch
     public bool IsActive { get; set; }
 }

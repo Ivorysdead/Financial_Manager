@@ -56,7 +56,7 @@ namespace MyFirstAzureFunction.Implementations.Services
         {
             try
             {
-                var accounts = await Task.Run(() => ReadAllAccounts().Where(a => a.UserID == userId).ToList()); // Make it async
+                var accounts = await Task.Run(() => ReadAllAccounts().Where(a => a.UserID.ToString() == userId).ToList()); // Make it async
                 return accounts;
             }
             catch (Exception e)
@@ -71,12 +71,12 @@ namespace MyFirstAzureFunction.Implementations.Services
             try
             {
                 var accounts = ReadAllAccounts();
-                var accountToSwitch = accounts.FirstOrDefault(a => a.AccountId == accountId && a.UserID == userId);
+                var accountToSwitch = accounts.FirstOrDefault(a => a.AccountId == accountId && a.UserID.ToString() == userId);
 
                 if (accountToSwitch != null)
                 {
                     // Business logic to mark the account as active (switch)
-                    foreach (var account in accounts.Where(a => a.UserID == userId))
+                    foreach (var account in accounts.Where(a => a.UserID.ToString() == userId))
                     {
                         account.IsActive = false; // All other accounts inactive
                     }
