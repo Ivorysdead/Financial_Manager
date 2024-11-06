@@ -1,5 +1,6 @@
 export async function apiGetRequest(path: string) {
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const apiBaseUrl = 'http://localhost:7208/api';
+    console.log(apiBaseUrl)
     console.log(path)
     return fetch(`${apiBaseUrl}${path}`, {
         method: 'GET',

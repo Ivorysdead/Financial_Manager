@@ -29,7 +29,7 @@ const Home = () => {
 
         const newAccount = {
             Id: parseInt(userId),  // Parse to integer if necessary
-            email: email,
+            Email: email,
             Username: username,
             password: password,
         };
@@ -103,10 +103,10 @@ const Home = () => {
                     </thead>
                     <tbody>
                     {user.length > 0 ? (
-                        user.map(({ Id, Email, Username, Password }) => (
+                        user.map(({ Id, email, Username, Password }) => (
                             <tr key={Id}>
                                 <td>{Id}</td>
-                                <td>{Email}</td>
+                                <td>{email}</td>
                                 <td>{Username}</td>
                                 <td>{Password}</td>
                             </tr>
